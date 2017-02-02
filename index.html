@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html ng-app='myApp' xmlns="http://www.w3.org/1999/xhtml">
+<html ng-app xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="UTF-8">
   <title>FreemanXP</title>
@@ -10,46 +10,56 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
     <link rel="stylesheet" href="styles.css" >
   </head>
-  <body ng-controller="testCtrl">
-    <div id="container" class="container-fluid">
+  <body>
+    <div id="container" class="container">
       <div class="col-lg-12 col-md-12">
-        <div class='col-lg- col-md-4 col-sm-6 col-xs-12'>
+        <div class='col-lg-6 col-md-6 col-sm-5 col-xs-12'>
           <h4>Freemanxp Info</h4>
-          <label>First Name:</label>
+          <p class="helper required-message">* required field</p>
+          <label>First Name: *</label>
           <input type="text" ng-model="firstName" placeholder="Enter your first name" class="form-control">
           <label>Middle Initial:</label>
           <input type="text" ng-model="middleInitial" placeholder="Enter your middle inital" class="form-control">
-          <label>Last Name:</label>
+          <label>Last Name: *</label>
           <input type="text" ng-model="lastName" placeholder="Enter your last name" class="form-control">
           <label>Certification:</label>
           <input type="text" ng-model="certification" placeholder="Enter your certification" class="form-control">
-          <p class="helper">e.g. CEM</p>
-          <label>Title:</label>
+          <p class="helper">e.g. CEM (not required.)</p>
+          <label>Title: *</label>
           <input type="text" ng-model="title" placeholder="Enter your title" class="form-control">
           <p class="helper">e.g. Sr. Director, Client Solutions - Global</p>
-          <label>Office Number:</label>
-          <input type="text" ng-model="officeNumber" placeholder="Office: 1-312-784-0107 or 44 020 3866 3062" class="form-control">
+          <br>
+          <label class="checkbox" for="checkbox1">
+            <p class="helper">I acknowledge that I am required to have at least one phone number in my signature (both office and mobile is acceptable as well).</p>
+            <input type="checkbox" ng-model="numberCheck" value="" id="checkbox1" data-toggle="checkbox" class="custom-checkbox"><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
+          </label>
+          <p class="helper">Format phone numbers depending on geo location (i.e. add dashes <span class="inline-example">"1-312..."</span> if required).</p>
+          <label>Office Number: </label>
+          <input type="text" ng-disabled="!numberCheck" ng-model="officeNumber" placeholder="Office: 1-312-784-0107 or 44 020 3866 3062" class="form-control">
           <p class="helper">
             <a href="https://en.wikipedia.org/wiki/List_of_country_calling_codes#Alphabetical_listing_by_country_or_region" target="_blank">Look up your country's calling code</a>
           </p>
           <label>Mobile Number:</label>
-          <input type="text" ng-model="mobileNumber" placeholder="Mobile: 1-312-784-0107 or 44 020 3866 3062" class="form-control">
+          <input type="text" ng-disabled="!numberCheck" ng-model="mobileNumber" placeholder="Mobile: 1-312-784-0107 or 44 020 3866 3062" class="form-control">
           <p class="helper">
             <a href="https://en.wikipedia.org/wiki/List_of_country_calling_codes#Alphabetical_listing_by_country_or_region" target="_blank">Look up your country's calling code</a>
           </p>
         </div>
-        <div class='col-lg-offset-2 col-lg-4 col-md-offset-2 col-md-4 col-sm-offset-1 col-sm-6 col-xs-12'>
+        <div class='col-lg-offset-1 col-lg-5 col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-6 col-xs-12'>
+          <div class="visible-xs-block spacer">
+          </div>
           <h4>Signatures</h4>
+          <p class="helper">Copy signatures after all requirements are met.</p>
           <div id="standard">
             <h6>Standard Signature</h6>
             <div id="standardWrap">
               <table>
                 <tbody>
                   <tr>
-                    <td><font face="Verdana, Arial, sans-serif" style="color: #14B1E7; font-size: 13px; text-transform: capitalize; font-weight: bold;">{{firstName}} {{middleInitial}} {{lastName}}<span ng-if="certification">, </span>{{certification}}</font><font face="Arial, Helvetica, sans-serif" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; text-transform: capitalize; font-weight: normal;">&nbsp;|&nbsp;{{title}}</font></td>
+                    <td style="height: 22px;"><font face="Verdana, Arial, sans-serif" style="color: #14B1E7; font-size: 13px; text-transform: capitalize; font-weight: bold;">{{firstName}} {{middleInitial}} {{lastName}}<span ng-if="certification">, </span>{{certification}}</font><font face="Arial, Helvetica, sans-serif" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; text-transform: capitalize; font-weight: normal;"><span ng-if="title">&nbsp;|&nbsp;</span>{{title}}</font></td>
                   </tr>
                   <tr>
-                    <td><font face="Arial, Helvetica, sans-serif" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal;"><span ng-if="officeNumber">O </span>&nbsp;</font><a href="tel:&#43;{{officeNumber}}" title="Call my office" style="word-wrap: break-word; color: #939598; text-decoration: none;"><font face="Arial, Helvetica, sans-serif" color="#939598" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; text-decoration: none;"><span ng-if="officeNumber">&#43;</span>{{officeNumber}}</font></a><font face="Arial, Helvetica, sans-serif" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal;">&nbsp;<span ng-if="officeNumber && mobileNumber">|</span>&nbsp;M&nbsp;</font><a href="tel:&#43;{{mobileNumber}}" target="_blank" title="Call my mobile" style="word-wrap: break-word; color: #939598; text-decoration: none;"><font face="Arial, Helvetica, sans-serif" color="#939598" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; text-decoration: none;">&#43;{{mobileNumber}}</font></a></td>
+                    <td><font face="Arial, Helvetica, sans-serif" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal;"><span ng-if="officeNumber">O&nbsp;</span></font><a href="tel:&#43;{{officeNumber}}" title="Call my office" style="word-wrap: break-word; color: #939598; text-decoration: none;"><font face="Arial, Helvetica, sans-serif" color="#939598" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; text-decoration: none;"><span ng-if="officeNumber">&#43;</span>{{officeNumber}}</font></a><font face="Arial, Helvetica, sans-serif" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal;"><span ng-if="officeNumber && mobileNumber">&nbsp;|</span><span ng-if="mobileNumber">&nbsp;M&nbsp;</span></font><a href="tel:&#43;{{mobileNumber}}" target="_blank" title="Call my mobile" style="word-wrap: break-word; color: #939598; text-decoration: none;"><font face="Arial, Helvetica, sans-serif" color="#939598" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; text-decoration: none;"><span ng-if="mobileNumber">&#43;</span>{{mobileNumber}}</font></a></td>
                   </tr>
                   <tr>
                     <td><a href="http://fxp.co/htmlemailimg" target="_blank" title="Visit FreemanXP" style="color: #939598; text-decoration: none;"><font face="Arial, Helvetica, sans-serif"  color="#939598" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; text-decoration: none;">freemanxp.com</font></a><font face="Arial, Helvetica, sans-serif" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal;">&nbsp;|&nbsp;</font><a href="http://twitter.com/freemanxp" title="Follow FreemanXP on Twitter" style="color: #939598; text-decoration: none;"><font face="Arial, Helvetica, sans-serif"  color="#939598" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; text-decoration: none;">@freemanxp</font></a></td>
@@ -60,8 +70,7 @@
                 </tbody>
               </table>
             </div>
-            <a ng-class="disabled()" href="#" id="standardButton" class="btn btn-block btn-lg btn-info copyButton" data-clipboard-action="copy" data-clipboard-target="#standardWrap">Copy Signature</a>
-
+            <a ng-disabled="!!!officeNumber.length && !!!mobileNumber.length || !firstName.length || !lastName.length || !title.length" href="#" id="standardButton" class="btn btn-block btn-lg btn-info copyButton" data-clipboard-action="copy" data-clipboard-target="#standardWrap">Copy Signature</a>
           </div>
 
           <div id="reply">
@@ -70,16 +79,15 @@
               <table>
                 <tbody>
                   <tr>
-                    <td><font face="Verdana, Arial, sans-serif" style="color: #14B1E7; font-size: 13px; text-transform: capitalize; font-weight: bold;">{{firstName}} {{middleInitial}} {{lastName}}, {{certification}}</font><font face="Arial, Helvetica, sans-serif" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; text-transform: capitalize; font-weight: normal;">&nbsp;|&nbsp;{{title}}</font></td>
+                    <td><font face="Verdana, Arial, sans-serif" style="color: #14B1E7; font-size: 13px; text-transform: capitalize; font-weight: bold;">{{firstName}} {{middleInitial}} {{lastName}}<span ng-if="certification">, </span>{{certification}}</font><font face="Arial, Helvetica, sans-serif" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; text-transform: capitalize; font-weight: normal;"><span ng-if="title">&nbsp;|&nbsp;</span>{{title}}</font></td>
                   </tr>
                   <tr>
-                    <td><font face="Arial, Helvetica, sans-serif" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal;">O&nbsp;</font><a href="tel:&#43;{{officeNumber}}" title="Call my office" style="word-wrap: break-word; color: #939598; text-decoration: none;"><font face="Arial, Helvetica, sans-serif" color="#939598" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; text-decoration: none;">&#43;{{officeNumber}}</font></a><font face="Arial, Helvetica, sans-serif" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal;">&nbsp;|&nbsp;M&nbsp;</font><a href="tel:&#43;{{mobileNumber}}" target="_blank" title="Call my mobile" style="word-wrap: break-word; color: #939598; text-decoration: none;"><font face="Arial, Helvetica, sans-serif" color="#939598" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; text-decoration: none;">&#43;{{mobileNumber}}</font></a></td>
+                    <td><font face="Arial, Helvetica, sans-serif" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal;"><span ng-if="officeNumber">O&nbsp;</span></font><a href="tel:&#43;{{officeNumber}}" title="Call my office" style="word-wrap: break-word; color: #939598; text-decoration: none;"><font face="Arial, Helvetica, sans-serif" color="#939598" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; text-decoration: none;"><span ng-if="officeNumber">&#43;</span>{{officeNumber}}</font></a><font face="Arial, Helvetica, sans-serif" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal;"><span ng-if="officeNumber && mobileNumber">&nbsp;|</span><span ng-if="mobileNumber">&nbsp;M&nbsp;</span></font><a href="tel:&#43;{{mobileNumber}}" target="_blank" title="Call my mobile" style="word-wrap: break-word; color: #939598; text-decoration: none;"><font face="Arial, Helvetica, sans-serif" color="#939598" style="color: #939598; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; text-decoration: none;"><span ng-if="mobileNumber">&#43;</span>{{mobileNumber}}</font></a></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <a href="#" id="replyButton" class="btn btn-block btn-lg btn-default disabled copyButton" data-clipboard-action="copy" data-clipboard-target="#replyWrap">Copy Signature</a>
-            <a href="#" id="replyButton" class="btn btn-block btn-lg btn-info copyButton" data-clipboard-action="copy" data-clipboard-target="#replyWrap">Copy Signature</a>
+            <a ng-disabled="!!!officeNumber.length && !!!mobileNumber.length || !firstName.length || !lastName.length || !title.length" href="#" id="replyButton" class="btn btn-block btn-lg btn-info copyButton" data-clipboard-action="copy" data-clipboard-target="#replyWrap">Copy Signature</a>
           </div>
         </div>
       </div>
@@ -88,41 +96,6 @@
   </body>
   <script type="text/javascript">
     var clipboard = new Clipboard('.copyButton');
-
-    var myApp = angular.module('myApp', []);
-
-    myApp.controller('testCtrl', function($scope){
-      $scope.disabled = function() {
-          var checked = function(){
-            if (!($scope.firstName.length > 0) && !($scope.lastName.length > 0)) {
-              return true
-            }
-          }
-        // return (!$scope.firstName && !$scope.lastName)
-        return {"disabled":false}
-      };
-
-    });
-
-    // var standardButton = document.querySelector('#standardButton');
-    // standardButton.addEventListener('click', function(event) {
-    //   var standard = document.getElementById('standardWrap').innerHTML;
-    //   copyToClipboard(standard);
-    // });
-    //
-    // function copyToClipboard(val){
-    //   console.log(val);
-    //   var dummy = document.createElement("input");
-    //   var container = document.getElementById('container');
-    //   container.appendChild(dummy);
-    //   // $(dummy).css('display','none');
-    //   dummy.setAttribute("id", "dummy_id");
-    //   document.getElementById("dummy_id").value=val;
-    //   dummy.select();
-    //   document.execCommand("copy");
-    //   container.removeChild(dummy);x
-    // }
-
   </script>
 </html>
 

@@ -1,13 +1,27 @@
 /* SITE STYLES */
 body {
   background-color: #f5f5f5;
+  padding-top: 48px;
 }
+
 label {
   margin-top: 16px;
 }
 
+#container > div > div.col-lg-.col-md-4.col-sm-6.col-xs-12 > label.checkbox > span {
+  top: 6px;
+}
+
 body label:first-child {
   margin-top: 0px;
+}
+
+div[class*="col-xs-"] {
+  max-width: 500px;
+}
+
+.spacer {
+  height: 32px;
 }
 
 #standard, #reply {
@@ -28,8 +42,19 @@ p.helper {
   font-size: 0.75em;
 }
 
-.btn {
-  margin-top: 32px;
+p span.inline-example {
+  font-weight: 700;
 }
 
-/* TABLE STYLES */
+p.required-message {
+  padding-bottom: 0px;
+}
+
+label p.helper {
+  font-size: 1em;
+}
+
+.btn {
+  max-width: 400px;
+  margin-top: 32px;
+}
